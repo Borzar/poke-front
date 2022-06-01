@@ -1,14 +1,21 @@
 import { render, screen } from '@testing-library/react'
-import Home from '@/pages/index'
+import Home from '../src/pages/index'
 
-describe('Home', () => {
-  it('renders a heading', () => {
-    render(<Home />)
+beforeEach(() => {
+  render(<Home />);
+});
 
-    const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
-    })
-
-    expect(heading).toBeInTheDocument()
+describe('<Home />', () => {
+  it('Menu Opcion 1', () => {
+    expect(screen.getByText(/opcion 1/i)).toBeInTheDocument()
+  })
+  it('Menu Opcion 2', () => {
+    expect(screen.getByText(/opcion 2/i)).toBeInTheDocument()
+  })
+  it('Menu Opcion 3', () => {
+    expect(screen.getByText(/opcion 3/i)).toBeInTheDocument()
+  })
+  it('Menu Opcion 4', () => {
+    expect(screen.getByText(/opcion 4/i)).toBeInTheDocument()
   })
 })
