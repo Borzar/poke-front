@@ -1,4 +1,6 @@
 import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
+import TextField from '@mui/material/TextField'
 import MessageIcon from '@mui/icons-material/Message'
 import CachedIcon from '@mui/icons-material/Cached'
 import BungalowIcon from '@mui/icons-material/Bungalow'
@@ -19,16 +21,15 @@ import AppBar from '@mui/material/AppBar'
 export default function Home() {
   const [showData, setShowData] = useState(false)
   const [page, setPage] = useState(0)
-  
+
   useEffect(() => {
     fetchDataByPage()
-  }, [])
+  }, [page])
 
-  // ASYNC AWAIT
   const fetchDataByPage = async () => {
     try {
       const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0`
+        `https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${page}0`
       )
       const data = await response.json()
       setShowData(data.results)
@@ -38,10 +39,22 @@ export default function Home() {
     }
   }
 
+  const handlePrevPage= () => {
+    if ( page < 1 ) return
+    setPage(page - 1) 
+  }
+  const handleNextPage = () => {
+    if ( page > 111) return
+    setPage(page + 1) 
+  }
+
+  const handleResetPage = () => {
+    setPage(page = 0)
+  }
   return (
     <>
       <Box>
-        <AppBar sx={{ bgcolor: 'rgb(	240,248,255)' }}>
+        <AppBar sx={{ bgcolor: 'rgb(240,248,255)' }}>
           <Toolbar>
             <Typography
               variant='h6'
@@ -59,29 +72,45 @@ export default function Home() {
       <Box sx={{ display: 'flex', mt: 10 }}>
         <Paper
           sx={{
-            width: 0.2,
+            display: 'flex',
+            flexDirection: 'column',
+            width: 0.15,
             mb: 'auto',
             mx: 'auto',
           }}
         >
-          <Typography sx={{ p: 1, mx: 'auto', textAlign: 'center' }}>
+          <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <BungalowIcon sx={{ mr: 1 }} />
             opcion 1
           </Typography>
-          <Typography sx={{ p: 1, mx: 'auto', textAlign: 'center' }}>
+          <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <BuildCircleIcon sx={{ mr: 1 }} />
             opcion 2
           </Typography>
-          <Typography sx={{ p: 1, mx: 'auto', textAlign: 'center' }}>
+          <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <CachedIcon sx={{ mr: 1 }} />
             opcion 3
           </Typography>
-          <Typography sx={{ p: 1, mx: 'auto', textAlign: 'center' }}>
+          <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <MessageIcon sx={{ mr: 1 }} />
             opcion 4
           </Typography>
         </Paper>
-          <TableContainer component={Paper} sx={{ ml: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+          <Paper sx={{ mb: 1, ml: 2, height:  'auto', display: 'flex' }}>
+            <Stack sx={{ mt: 2, width: 0.5, mx: 'auto', flexDirection: 'row' }}>
+              <Button variant='outlined' size='small' sx={{ mr: 3 , mb: 2}} onClick={ handlePrevPage }>Prev</Button>
+              {page}
+              <Button variant='outlined' size='small' sx={{ ml: 3, mb: 2 }} onClick={ handleNextPage}>Next</Button>
+              <Button variant='outlined' size='small' sx={{ ml: 3, mb: 2 }} onClick={ handleResetPage}>Reset</Button>
+            </Stack>
+            <TextField
+              label='Search by name'
+              size='small'
+              sx={{ mt: 1, width: 0.2, mx: 'auto' }}
+            />
+          </Paper>
+          <TableContainer component={Paper} sx={{ ml: 2, width: 'auto' }}>
             <Table aria-label='simple table'>
               <TableHead>
                 <TableRow>
@@ -107,6 +136,7 @@ export default function Home() {
               </TableBody>
             </Table>
           </TableContainer>
+        </Box>
       </Box>
     </>
   )
