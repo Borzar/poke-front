@@ -1,7 +1,7 @@
-import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
-import KeyboardDoubleArrowLeftRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowLeftRounded';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded'
+import KeyboardDoubleArrowLeftRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowLeftRounded'
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
@@ -44,12 +44,30 @@ export default function Home() {
   }
 
   const handleNextTenPages = () => {
-    if (page < 1) return
-    setPage(page - 10)
+    if (page > 111) return
+    if (page == 103) return
+    if (page == 104) return
+    if (page == 105) return
+    if (page == 106) return
+    if (page == 107) return
+    if (page == 108) return
+    if (page == 109) return
+    if (page == 110) return
+    if (page == 111) return
+    setPage(page + 10)
   }
   const handlePrevTenPages = () => {
-    if (page > 111) return
-    setPage(page + 10)
+    if (page < 1) return
+    if (page == 1) return
+    if (page == 2) return
+    if (page == 3) return
+    if (page == 4) return
+    if (page == 5) return
+    if (page == 6) return
+    if (page == 7) return
+    if (page == 8) return
+    if (page == 9) return
+    setPage(page - 10)
   }
   const handlePrevPage = () => {
     if (page < 1) return
@@ -61,7 +79,7 @@ export default function Home() {
   }
 
   const handleResetPage = () => {
-    setPage(page = 0)
+    setPage((page = 0))
   }
   return (
     <>
@@ -115,10 +133,10 @@ export default function Home() {
                 variant='outlined'
                 size='small'
                 sx={{ mb: 2, mr: 3 }}
-                onClick={handleNextTenPages}
+                onClick={handlePrevTenPages}
                 startIcon={<KeyboardDoubleArrowLeftRoundedIcon />}
               >
-                10 
+                10
               </Button>
               <Button
                 variant='outlined'
@@ -126,8 +144,7 @@ export default function Home() {
                 sx={{ mr: 3, mb: 2 }}
                 onClick={handlePrevPage}
                 endIcon={<KeyboardArrowLeftRoundedIcon />}
-              > 
-              </Button>
+              ></Button>
               {page}
               <Button
                 variant='outlined'
@@ -135,25 +152,24 @@ export default function Home() {
                 sx={{ ml: 3, mb: 2 }}
                 onClick={handleNextPage}
                 startIcon={<KeyboardArrowRightIcon />}
-              >
-              </Button>
+              ></Button>
               <Button
                 variant='outlined'
                 size='small'
                 sx={{ ml: 3, mb: 2 }}
-                onClick={handlePrevTenPages}
+                onClick={handleNextTenPages}
                 endIcon={<KeyboardDoubleArrowRightIcon />}
               >
-                 10 
+                10
               </Button>
               <Button
-                color= 'info' 
+                color='info'
                 variant='contained'
                 size='small'
                 sx={{ ml: 3, mb: 2 }}
                 onClick={handleResetPage}
               >
-               Clear 
+                Clear
               </Button>
             </Stack>
             <TextField
