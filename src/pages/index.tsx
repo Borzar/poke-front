@@ -1,3 +1,7 @@
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
+import KeyboardDoubleArrowLeftRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowLeftRounded';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
@@ -39,13 +43,21 @@ export default function Home() {
     }
   }
 
-  const handlePrevPage= () => {
-    if ( page < 1 ) return
-    setPage(page - 1) 
+  const handleNextTenPages = () => {
+    if (page < 1) return
+    setPage(page - 10)
+  }
+  const handlePrevTenPages = () => {
+    if (page > 111) return
+    setPage(page + 10)
+  }
+  const handlePrevPage = () => {
+    if (page < 1) return
+    setPage(page - 1)
   }
   const handleNextPage = () => {
-    if ( page > 111) return
-    setPage(page + 1) 
+    if (page > 111) return
+    setPage(page + 1)
   }
 
   const handleResetPage = () => {
@@ -97,12 +109,52 @@ export default function Home() {
           </Typography>
         </Paper>
         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-          <Paper sx={{ mb: 1, ml: 2, height:  'auto', display: 'flex' }}>
+          <Paper sx={{ mb: 1, ml: 2, height: 'auto', display: 'flex' }}>
             <Stack sx={{ mt: 2, width: 0.5, mx: 'auto', flexDirection: 'row' }}>
-              <Button variant='outlined' size='small' sx={{ mr: 3 , mb: 2}} onClick={ handlePrevPage }>Prev</Button>
+              <Button
+                variant='outlined'
+                size='small'
+                sx={{ mb: 2, mr: 3 }}
+                onClick={handleNextTenPages}
+                startIcon={<KeyboardDoubleArrowLeftRoundedIcon />}
+              >
+                10 
+              </Button>
+              <Button
+                variant='outlined'
+                size='small'
+                sx={{ mr: 3, mb: 2 }}
+                onClick={handlePrevPage}
+                endIcon={<KeyboardArrowLeftRoundedIcon />}
+              > 
+              </Button>
               {page}
-              <Button variant='outlined' size='small' sx={{ ml: 3, mb: 2 }} onClick={ handleNextPage}>Next</Button>
-              <Button variant='outlined' size='small' sx={{ ml: 3, mb: 2 }} onClick={ handleResetPage}>Reset</Button>
+              <Button
+                variant='outlined'
+                size='small'
+                sx={{ ml: 3, mb: 2 }}
+                onClick={handleNextPage}
+                startIcon={<KeyboardArrowRightIcon />}
+              >
+              </Button>
+              <Button
+                variant='outlined'
+                size='small'
+                sx={{ ml: 3, mb: 2 }}
+                onClick={handlePrevTenPages}
+                endIcon={<KeyboardDoubleArrowRightIcon />}
+              >
+                 10 
+              </Button>
+              <Button
+                color= 'info' 
+                variant='contained'
+                size='small'
+                sx={{ ml: 3, mb: 2 }}
+                onClick={handleResetPage}
+              >
+               Clear 
+              </Button>
             </Stack>
             <TextField
               label='Search by name'
@@ -114,8 +166,8 @@ export default function Home() {
             <Table aria-label='simple table'>
               <TableHead>
                 <TableRow>
-                  <TableCell>PM</TableCell>
-                  <TableCell>Url</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>PM</TableCell>
+                  <TableCell sx={{ fontWeight: 'bold' }}>URL</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
