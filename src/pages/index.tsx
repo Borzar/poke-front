@@ -1,5 +1,6 @@
 import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded'
 import KeyboardDoubleArrowLeftRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowLeftRounded'
+import Link from 'next/link'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
 import Box from '@mui/material/Box'
@@ -21,14 +22,31 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import AppBar from '@mui/material/AppBar'
+import { GetStaticProps } from 'next'
 
 export default function Home() {
   const [showData, setShowData] = useState(false)
   const [page, setPage] = useState(0)
+  const [search, setSearch] = useState()
 
   useEffect(() => {
     fetchDataByPage()
   }, [page])
+
+  useEffect(() => {
+    const fetchDataByInput = async () => {
+      try {
+        const responseInput = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${search}`
+        )
+        const dataInput = await responseInput.json()
+        console.log(dataInput)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    fetchDataByInput()
+  }, [search])
 
   const fetchDataByPage = async () => {
     try {
@@ -37,7 +55,6 @@ export default function Home() {
       )
       const data = await response.json()
       setShowData(data.results)
-      console.log(data.results)
     } catch (e) {
       console.log(`error: ${e}`)
     }
@@ -63,6 +80,12 @@ export default function Home() {
   const handleResetPage = () => {
     setPage((page = 0))
   }
+
+  const handleInputSearch = (e) => {
+    e.preventDefault
+    setSearch(e.target.value)
+  }
+
   return (
     <>
       <Box>
@@ -93,19 +116,19 @@ export default function Home() {
         >
           <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <BungalowIcon sx={{ mr: 1 }} />
-            opcion 1
+            <Link href='/opcion1'>opcion 1</Link>
           </Typography>
           <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <BuildCircleIcon sx={{ mr: 1 }} />
-            opcion 2
+            <Link href='/opcion2'>opcion 2</Link>
           </Typography>
           <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <CachedIcon sx={{ mr: 1 }} />
-            opcion 3
+            <Link href='/opcion3'>opcion 3</Link>
           </Typography>
           <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <MessageIcon sx={{ mr: 1 }} />
-            opcion 4
+            <Link href='/opcion4'>opcion 4</Link>
           </Typography>
         </Paper>
         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
@@ -158,6 +181,7 @@ export default function Home() {
               label='Search by name'
               size='small'
               sx={{ mt: 1, width: 0.2, mx: 'auto' }}
+              onChange={handleInputSearch}
             />
           </Paper>
           <TableContainer component={Paper} sx={{ ml: 2, width: 'auto' }}>
@@ -190,4 +214,22 @@ export default function Home() {
       </Box>
     </>
   )
+}
+// Funcion que es ejecutada del lado del servidor, en el build time.
+// Esta funcion solo se va a ser usada cuando podamos saber de antemano
+// que estos son los parametros que esta pagina nececita.
+// Por ejemplo: en esta pagina mostraremos 150 pokemons entonces de
+// antemano se cargan estos pokemons para que cuando se haga el build
+// de la aplicacion esos 150 pokemons sean parte de la peticion del
+// html que estamos regresando. No se haran peticiones adicionales
+// al cliente, el cliente apenas carge la pagina, esta pagina ya vendra
+// con toda la informacion pre insertados. Esta pre insercion ocurre a
+// la hora de construir la aplicacion.
+
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  return {
+    props: {
+      // props que llegan a este componente Home como props
+    },
+  }
 }
