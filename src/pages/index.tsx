@@ -10,18 +10,15 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { useState, useEffect } from 'react'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import AppBar from '@mui/material/AppBar'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
 
 export default function Home() {
   const [pokemon, setPokemon] = useState([])
   const [search, setSearch] = useState('')
+  //const [id, setId] = useState()
 
   useEffect(() => {
     fetchData()
@@ -42,6 +39,17 @@ export default function Home() {
     }
   }
 
+  //const fetchDataById = async () => {
+    //try {
+      //const url = `https://pokeapi.co/api/v2/pokemon/${id}`
+      //const resp = await fetch(url)
+      //const data = await resp.json()
+      //setId(getId)
+    //} catch (e) {
+      //console.log(`error: ${e}`)
+    //}
+  //}
+  
   const handleSearch = (e) => {
     setSearch(e.target.value)
   }
@@ -104,32 +112,21 @@ export default function Home() {
               />
             </Stack>
           </Paper>
-          <TableContainer component={Paper} sx={{ ml: 2, width: 'auto' }}>
-            <Table aria-label='simple table'>
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={{ fontWeight: 'bold' }}>PM</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold' }}>URL</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {showData &&
-                  showData.map((d) => (
-                    <TableRow
-                      key={d.name}
-                      sx={{
-                        '&:last-child td, &:last-child th': { border: 0 },
-                      }}
-                    >
-                      <TableCell component='th' scope='row'>
-                        {d.name}
-                      </TableCell>
-                      <TableCell>{d.url}</TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 1, ml: 2 }}>
+            {showData &&
+              showData.map((x) => (
+                <Card sx={{ minWidth: 275, m: 2}} key={x.name} >
+                  <CardContent
+                    sx={{ display: 'flex', flexDirection: 'column' }}
+                  >
+                    <Typography sx= {{ mx: 'auto' }}variant='h5' component='div'>
+                      {x.name}
+                    </Typography>
+                    <Typography variant='body2'>{x.url}</Typography>
+                  </CardContent>
+                </Card>
+              ))}
+          </Box>
         </Box>
       </Box>
     </>
