@@ -14,11 +14,11 @@ import Paper from '@mui/material/Paper'
 import AppBar from '@mui/material/AppBar'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import { useRouter } from 'next/router'
 
 export default function Home() {
   const [pokemon, setPokemon] = useState([])
   const [search, setSearch] = useState('')
-  //const [id, setId] = useState()
 
   useEffect(() => {
     fetchData()
@@ -39,17 +39,6 @@ export default function Home() {
     }
   }
 
-  //const fetchDataById = async () => {
-    //try {
-      //const url = `https://pokeapi.co/api/v2/pokemon/${id}`
-      //const resp = await fetch(url)
-      //const data = await resp.json()
-      //setId(getId)
-    //} catch (e) {
-      //console.log(`error: ${e}`)
-    //}
-  //}
-  
   const handleSearch = (e) => {
     setSearch(e.target.value)
   }
@@ -84,19 +73,19 @@ export default function Home() {
         >
           <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <BungalowIcon sx={{ mr: 1 }} />
-            <Link href='/opcion1'>Home</Link>
+            <Link href='/home'>Home</Link>
           </Typography>
           <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <BuildCircleIcon sx={{ mr: 1 }} />
-            <Link href='/opcion2'>Settings</Link>
+            <Link href='/Settings'>Settings</Link>
           </Typography>
           <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <CachedIcon sx={{ mr: 1 }} />
-            <Link href='/opcion3'>Favorites</Link>
+            <Link href='/Favorites'>Favorites</Link>
           </Typography>
           <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <MessageIcon sx={{ mr: 1 }} />
-            <Link href='/opcion4'>About</Link>
+            <Link href='/About'>About</Link>
           </Typography>
         </Paper>
         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
@@ -114,15 +103,22 @@ export default function Home() {
           </Paper>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 1, ml: 2 }}>
             {showData &&
-              showData.map((x) => (
-                <Card sx={{ minWidth: 275, m: 2}} key={x.name} >
+              showData.map((x, i) => (
+                <Card sx={{ minWidth: 275, m: 2 }} key={x.name}>
                   <CardContent
                     sx={{ display: 'flex', flexDirection: 'column' }}
                   >
-                    <Typography sx= {{ mx: 'auto' }}variant='h5' component='div'>
-                      {x.name}
+                    <Typography
+                      sx={{ mx: 'auto' }}
+                      variant='h5'
+                      component='div'
+                    >
+                      <Link href={`/pokemon/${x.name}`}>
+                        <a>{x.name}</a>
+                      </Link>
                     </Typography>
-                    <Typography variant='body2'>{x.url}</Typography>
+                    <Typography variant='body2'></Typography>
+                    <Typography variant='body2'>id: {i} </Typography>
                   </CardContent>
                 </Card>
               ))}

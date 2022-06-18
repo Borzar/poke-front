@@ -5,17 +5,18 @@ beforeEach(() => {
   render(<Home />);
 });
 
-describe('<Home />', () => {
-  it('Menu Opcion 1', () => {
-    expect(screen.getByText(/opcion 1/i)).toBeInTheDocument()
+describe('<Home/>', () => {
+  it('show Home on menu', () => {
+    expect(screen.getByText(/Home/i)).toBeInTheDocument()
   })
-  it('Menu Opcion 2', () => {
-    expect(screen.getByText(/opcion 2/i)).toBeInTheDocument()
+  it('show Settings on menu', () => {
+    expect(screen.getByText(/settings/i)).toBeInTheDocument()
   })
-  it('Menu Opcion 3', () => {
-    expect(screen.getByText(/opcion 3/i)).toBeInTheDocument()
+  it('show Favorites on menu', () => {
+    expect(screen.getByText(/favorites/i)).toBeInTheDocument()
   })
-  it('Menu Opcion 4', () => {
-    expect(screen.getByText(/opcion 4/i)).toBeInTheDocument()
+  it('show About on menu', () => {
+    expect(screen.getByText(/about/i)).toBeInTheDocument()
   })
 })
+
