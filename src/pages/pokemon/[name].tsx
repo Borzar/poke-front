@@ -12,7 +12,7 @@ const PokemonPage = () => {
 
   useEffect(() => {
     fetchPokemonByName()
-  }, [])
+  }, [name])
 
   const fetchPokemonByName = async () => {
     const url = `https://pokeapi.co/api/v2/pokemon/${name}`
@@ -23,18 +23,19 @@ const PokemonPage = () => {
 
   return (
     <>
-      {/* AGREGAR CONDICIONAL PARA MOSTRAR LA DATA */}
-      <Card sx={{ width: 600, mx: 'auto' }}>
-        <CardContent>
-          <Typography variant='h5'>{pokemon.name}</Typography>
-          <Typography>ID: {pokemon.id}</Typography>
-          <Typography>Height: {pokemon.height}</Typography>
-          <Typography>Weight: {pokemon.weight}</Typography>
-          <img
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
-          />
-        </CardContent>
-      </Card>
+      {pokemon && (
+        <Card sx={{ my: 'auto', mx: 'auto' }}>
+          <CardContent>
+            <Typography variant='h5'>{pokemon.name}</Typography>
+            <Typography>ID: {pokemon.id}</Typography>
+            <Typography>Height: {pokemon.height}</Typography>
+            <Typography>Weight: {pokemon.weight}</Typography>
+            <img
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
+            />
+          </CardContent>
+        </Card>
+      )}
     </>
   )
 }

@@ -14,7 +14,6 @@ import Paper from '@mui/material/Paper'
 import AppBar from '@mui/material/AppBar'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import { useRouter } from 'next/router'
 
 export default function Home() {
   const [pokemon, setPokemon] = useState([])
