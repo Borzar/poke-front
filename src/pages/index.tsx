@@ -1,7 +1,5 @@
 import Link from 'next/link'
 import Box from '@mui/material/Box'
-import Stack from '@mui/material/Stack'
-import TextField from '@mui/material/TextField'
 import MessageIcon from '@mui/icons-material/Message'
 import CachedIcon from '@mui/icons-material/Cached'
 import BungalowIcon from '@mui/icons-material/Bungalow'
@@ -14,6 +12,7 @@ import Paper from '@mui/material/Paper'
 import AppBar from '@mui/material/AppBar'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import {SearchInput} from 'src/components/SearchInput/SearchInput'
 
 export default function Home() {
   const [pokemon, setPokemon] = useState([])
@@ -36,10 +35,6 @@ export default function Home() {
     } catch (e) {
       console.log(`error: ${e}`)
     }
-  }
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value)
   }
 
   return (
@@ -88,19 +83,10 @@ export default function Home() {
           </Typography>
         </Paper>
         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-          <Paper sx={{ mb: 1, ml: 2, height: 'auto', display: 'flex' }}>
-            <Stack sx={{ mt: 2, width: 0.5, mx: 'auto', flexDirection: 'row' }}>
-              <TextField
-                type='text'
-                label='Search by name'
-                size='small'
-                sx={{ mx: 'auto', mb: 2 }}
-                onChange={handleSearch}
-                value={search}
-              />
-            </Stack>
-          </Paper>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 1, ml: 2 }}>
+          <SearchInput 
+            setSearch= { setSearch }
+          /> 
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 1, ml: 2 }}>
             {showData &&
               showData.map((x, i) => (
                 <Card sx={{ minWidth: 275, m: 2 }} key={x.name}>
