@@ -7,35 +7,21 @@ import BuildCircleIcon from '@mui/icons-material/BuildCircle'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Paper from '@mui/material/Paper'
 import AppBar from '@mui/material/AppBar'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import {SearchInput} from 'src/components/SearchInput/SearchInput'
+import { SearchInput } from 'src/components/SearchInput'
+import { useFetchPokemon } from 'src/hooks'
 
 export default function Home() {
-  const [pokemon, setPokemon] = useState([])
   const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    fetchData()
-  }, [])
+  const { pokemon, loading } = useFetchPokemon(search)
 
   const showData = !search
     ? pokemon
     : pokemon.filter((x) => x.name.toLowerCase().includes(search.toLowerCase()))
-
-  const fetchData = async () => {
-    try {
-      const url = `https://pokeapi.co/api/v2/pokemon/${search}?limit=151`
-      const resp = await fetch(url)
-      const data = await resp.json()
-      setPokemon(data.results)
-    } catch (e) {
-      console.log(`error: ${e}`)
-    }
-  }
 
   return (
     <>
@@ -83,10 +69,8 @@ export default function Home() {
           </Typography>
         </Paper>
         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-          <SearchInput 
-            setSearch= { setSearch }
-          /> 
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 1, ml: 2 }}>
+          <SearchInput setSearch={setSearch} />
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 1, ml: 2 }}>
             {showData &&
               showData.map((x, i) => (
                 <Card sx={{ minWidth: 275, m: 2 }} key={x.name}>

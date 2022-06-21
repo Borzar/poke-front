@@ -4,23 +4,22 @@ import TextField from '@mui/material/TextField'
 import Paper from '@mui/material/Paper'
 
 export const SearchInput = ({ setSearch }) => {
+	const [inputValue, setInputValue] = useState('')
 
-  const [inputValue, setInputValue] = useState('')
-	
-  const onInputChange = ( { target } ) => {
-    setInputValue(target.value)
-  }
+	const onInputChange = ({ target }) => {
+		setInputValue(target.value)
+	}
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-		if ( inputValue.trim().length <= 1) return  
+		if (inputValue.trim().length <= 1) return
 		setSearch(inputValue)
 		setInputValue('')
 	}
 
 	return (
 		<>
-			<form onSubmit={ onSubmit }>		
+			<form onSubmit={onSubmit}>
 				<Paper sx={{ mb: 1, ml: 2, height: 'auto', display: 'flex' }}>
 					<Stack sx={{ mt: 2, width: 0.5, mx: 'auto', flexDirection: 'row' }}>
 						<TextField
@@ -34,7 +33,6 @@ export const SearchInput = ({ setSearch }) => {
 					</Stack>
 				</Paper>
 			</form>
-
 		</>
 	)
 }
