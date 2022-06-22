@@ -16,12 +16,9 @@ import { SearchInput } from 'src/components/SearchInput'
 import { useFetchPokemon } from 'src/hooks'
 
 export default function Home() {
-  const [search, setSearch] = useState('')
-  const { pokemon, loading } = useFetchPokemon(search)
+  const [ namePokemon, setNamePokemon] = useState('')
+  const { loading, showData } = useFetchPokemon(namePokemon)
 
-  const showData = !search
-    ? pokemon
-    : pokemon.filter((x) => x.name.toLowerCase().includes(search.toLowerCase()))
 
   return (
     <>
@@ -69,7 +66,7 @@ export default function Home() {
           </Typography>
         </Paper>
         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-          <SearchInput setSearch={setSearch} />
+          <SearchInput setNamePokemon={setNamePokemon} />
           <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 1, ml: 2 }}>
             {showData &&
               showData.map((x, i) => (
