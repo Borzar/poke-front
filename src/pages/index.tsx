@@ -2,23 +2,21 @@ import Link from 'next/link'
 import Box from '@mui/material/Box'
 import MessageIcon from '@mui/icons-material/Message'
 import CachedIcon from '@mui/icons-material/Cached'
-import BungalowIcon from '@mui/icons-material/Bungalow'
 import BuildCircleIcon from '@mui/icons-material/BuildCircle'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import { useState } from 'react'
 import Paper from '@mui/material/Paper'
 import AppBar from '@mui/material/AppBar'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import { SearchInput } from 'src/components/SearchInput'
+import { useState } from 'react'
 import { useFetchPokemon } from 'src/hooks'
 
 export default function Home() {
-  const [ namePokemon, setNamePokemon] = useState('')
+  const [namePokemon, setNamePokemon] = useState('')
   const { loading, showData } = useFetchPokemon(namePokemon)
-
 
   return (
     <>
@@ -49,27 +47,25 @@ export default function Home() {
           }}
         >
           <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
-            <BungalowIcon sx={{ mr: 1 }} />
-            <Link href='/home'>Home</Link>
-          </Typography>
-          <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <BuildCircleIcon sx={{ mr: 1 }} />
-            <Link href='/Settings'>Settings</Link>
+            <Link href='/settings'>
+                Settings 
+            </Link>
           </Typography>
           <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <CachedIcon sx={{ mr: 1 }} />
-            <Link href='/Favorites'>Favorites</Link>
+            <Link href='/favorites'>Favorites</Link>
           </Typography>
           <Typography sx={{ p: 1, mx: 'auto', display: 'flex' }}>
             <MessageIcon sx={{ mr: 1 }} />
-            <Link href='/About'>About</Link>
+            <Link href='/about'>About</Link>
           </Typography>
         </Paper>
         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
           <SearchInput setNamePokemon={setNamePokemon} />
           <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 1, ml: 2 }}>
             {showData &&
-              showData.map((x, i) => (
+              showData.map((x) => (
                 <Card sx={{ minWidth: 275, m: 2 }} key={x.name}>
                   <CardContent
                     sx={{ display: 'flex', flexDirection: 'column' }}
@@ -79,12 +75,11 @@ export default function Home() {
                       variant='h5'
                       component='div'
                     >
-                      <Link href={`/pokemon/${x.name}`}>
+                      <Link href={`/pokemon/${x.name}`} underline='none'>
                         <a>{x.name}</a>
                       </Link>
                     </Typography>
                     <Typography variant='body2'></Typography>
-                    <Typography variant='body2'>id: {i} </Typography>
                   </CardContent>
                 </Card>
               ))}
