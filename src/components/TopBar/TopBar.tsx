@@ -5,8 +5,8 @@ import Button from '@mui/material/Button'
 import AppBar from '@mui/material/AppBar'
 
 export const TopBar = () => {
-	return (
-		<>
+  return (
+    <>
       <Box>
         <AppBar sx={{ bgcolor: 'rgb(240,248,255)' }}>
           <Toolbar>
@@ -23,6 +23,6 @@ export const TopBar = () => {
           </Toolbar>
         </AppBar>
       </Box>
-		</>
-	)
+    </>
+  )
 }
