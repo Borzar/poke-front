@@ -16,7 +16,7 @@ export const useFetchPokemon = (namePokemon) => {
     getPokemon()
   }, [])
 
-  const showData = !namePokemon
+  const filterData = !namePokemon
     ? pokemon
     : pokemon.filter((x) =>
         x.name.toLowerCase().includes(namePokemon.toLowerCase())
@@ -24,6 +24,6 @@ export const useFetchPokemon = (namePokemon) => {
 
   return {
     loading,
-    showData,
+    filterData,
   }
 }
