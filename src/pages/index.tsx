@@ -18,7 +18,7 @@ export default function Home() {
         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
           <SearchInput setNamePokemon={setNamePokemon} />
           <PokemonGrid 
-            loading = {loading}
+            loading={loading}
             filterData={filterData} />
         </Box>
       </Box>

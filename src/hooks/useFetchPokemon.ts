@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export const useFetchPokemon = (namePokemon) => {
+export const useFetchPokemon = (namePokemon: string) => {
   const [pokemon, setPokemon] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -16,7 +16,7 @@ export const useFetchPokemon = (namePokemon) => {
     getPokemon()
   }, [])
 
-  const filterData = !namePokemon
+  const filterData:string[] = !namePokemon
     ? pokemon
     : pokemon.filter((x) =>
         x.name.toLowerCase().includes(namePokemon.toLowerCase())

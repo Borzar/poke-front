@@ -14,7 +14,7 @@ export const PokemonGrid = ({ filterData, loading }) => {
             <Card sx={{ minWidth: 275, m: 2 }} key={x.name}>
               <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography sx={{ mx: 'auto' }} variant='h5' component='div'>
-                  <Link href={`/pokemon/${x.name}`} underline='none'>
+                  <Link href={`/pokemon/${x.name}`}>
                     <a>{x.name}</a>
                   </Link>
                 </Typography>
