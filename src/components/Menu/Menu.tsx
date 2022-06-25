@@ -5,7 +5,7 @@ import BuildCircleIcon from '@mui/icons-material/BuildCircle'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 
-export const Menu = () => {
+const Menu = () => {
   return (
     <>
       <Paper
@@ -33,3 +33,5 @@ export const Menu = () => {
     </>
   )
 }
+
+export default Menu

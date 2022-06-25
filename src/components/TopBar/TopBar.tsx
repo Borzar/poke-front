@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import AppBar from '@mui/material/AppBar'
 
-export const TopBar = () => {
+const TopBar = () => {
   return (
     <>
       <Box>
@@ -26,3 +26,5 @@ export const TopBar = () => {
     </>
   )
 }
+
+export default TopBar 
