@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Paper from '@mui/material/Paper'
 
-export const SearchInput = ({ setNamePokemon }) => {
+ const SearchInput = ({ setNamePokemon }) => {
   const [inputValue, setInputValue] = useState('')
 
   const onInputChange = ({ target }) => {
@@ -36,3 +36,5 @@ export const SearchInput = ({ setNamePokemon }) => {
     </>
   )
 }
+
+export default SearchInput

@@ -1,2 +1,1 @@
-
-export * from './useFetchPokemon'
+export { default as useFetchPokemon } from './useFetchPokemon'

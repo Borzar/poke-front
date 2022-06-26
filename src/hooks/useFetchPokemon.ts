@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export const useFetchPokemon = (namePokemon: string) => {
+const useFetchPokemon = (namePokemon: string) => {
   const [pokemon, setPokemon] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -27,3 +27,5 @@ export const useFetchPokemon = (namePokemon: string) => {
     filterData,
   }
 }
+
+export default useFetchPokemon

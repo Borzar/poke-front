@@ -7,12 +7,12 @@ beforeEach(() => {
 
 describe('<Menu />', () => {
   it('show settings on Menu', () => {
-    expect(screen.getByText(/settings/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Settings' })).toBeInTheDocument()
   })
   it('show favorites on Menu', () => {
-    expect(screen.getByText(/favorites/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Favorites' })).toBeInTheDocument()
   })
   it('show about on Menu', () => {
-    expect(screen.getByText(/about/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'About' })).toBeInTheDocument()
   })
 })

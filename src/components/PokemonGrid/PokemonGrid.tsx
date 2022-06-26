@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 
-export const PokemonGrid = ({ filterData, loading }) => {
+const PokemonGrid = ({ filterData, loading }) => {
   return (
     <>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 1, ml: 2 }}>
@@ -25,3 +25,5 @@ export const PokemonGrid = ({ filterData, loading }) => {
     </>
   )
 }
+
+export default PokemonGrid
